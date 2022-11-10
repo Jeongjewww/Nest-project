@@ -1,7 +1,7 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { Session } from 'src/entities/session.entity';
-import { CreateSessionDto } from './dto/create.session.dto';
-import { UpdateSessionDto } from './dto/update.session.dto';
+import { CreateSessionDto } from './dto/create-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
 
 @Injectable()
 export class SessionService {
@@ -27,12 +27,17 @@ export class SessionService {
     }
 
     delete(id: number) {
-        this.getOne(id);
-        this.server = this.server.filter(session => session.id !== id);
+        const deleteData = this.getOne(id);
+        if (!deleteData) {
+            throw new InternalServerErrorException("서버 오류로 값을 가져올 수 없습니다.");
+        } else {
+            this.server = this.server.filter(session => session.id !== id);
+        }
     }
 
     update(id: number, updateData: UpdateSessionDto) {
         const oneSession = this.getOne(id);
+        // this.delete(id);    // 기존데이터 삭제할 경우
         this.server.push({ ...oneSession, ...updateData });
     }
 }

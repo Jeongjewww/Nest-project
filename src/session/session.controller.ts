@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Patch, Post, Param, Delete } from '@nestjs/common';
 import { Session } from 'src/entities/session.entity';
-import { CreateSessionDto } from './dto/create.session.dto';
-import { UpdateSessionDto } from './dto/update.session.dto';
+import { CreateSessionDto } from './dto/create-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
 import { SessionService } from './session.service';
 
 @Controller('session')

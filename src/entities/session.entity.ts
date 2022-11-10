@@ -1,6 +1,8 @@
 export class Session {
     id: number;
-    network: string;
-    ip: string;
-    port: number;
+    sessionServer: string;
+    privateIp: string;
+    privatPort: number;
+    publicIp: string;
+    publicPort: number;
 }
