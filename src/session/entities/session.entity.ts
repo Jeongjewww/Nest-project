@@ -35,6 +35,6 @@ export class Session {
   @Column({ default: false })
   delete: boolean;
 
-  @Column({ default: 0 })
-  refCnt: number;
+  // @Column({ default: 0 })
+  // refCnt: number;
 }
