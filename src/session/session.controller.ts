@@ -31,7 +31,7 @@ export class SessionController {
   // 전체 데이터 추가
   @Post()
   @UsePipes(ValidationPipe)
-  createSession(@Body() sessionData: CreateSessionDto) {
+  createSession(@Body(ValidationPipe) sessionData: CreateSessionDto) {
     return this.sessionServer.create(sessionData);
   }
 

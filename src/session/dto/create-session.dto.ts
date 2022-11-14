@@ -1,6 +1,7 @@
 import {
   IsBoolean,
   IsDate,
+  IsIP,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -12,7 +13,7 @@ export class CreateSessionDto {
   @IsNotEmpty()
   sessionServer: string;
 
-  @IsString()
+  @IsIP()
   @IsOptional()
   privateIp: string;
 
@@ -20,7 +21,7 @@ export class CreateSessionDto {
   @IsOptional()
   privatePort: number;
 
-  @IsString()
+  @IsIP()
   @IsOptional()
   publicIp: string;
 
@@ -48,6 +49,6 @@ export class CreateSessionDto {
   @IsOptional()
   delete: boolean;
 
-  @IsNumber()
-  refCnt: number;
+  // @IsNumber()
+  // refCnt: number;
 }
