@@ -1,16 +1,11 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from 'src/session/entities/session.entity';
-import { CreateSessionDto } from './dto/create-session.dto';
-import { UpdateSessionDto } from './dto/update-session.dto';
+import { CreateSessionDto } from '../dto/create-session.dto';
+import { UpdateSessionDto } from '../dto/update-session.dto';
 
 @Injectable()
 export class SessionService {
-  // constructor(
-  //   @InjectRepository(Session)
-  //   private readonly sessionRepository: Repository<Session>,
-  // ) {}
-
   private server: Session[] = [];
 
   getAll(): Session[] {
