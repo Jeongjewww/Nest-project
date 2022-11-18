@@ -1,6 +1,6 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Session } from 'src/session/entities/session.entity';
+import { Session } from 'src/modeset/entities/session.entity';
 import { CreateSessionDto } from '../dto/create-session.dto';
 import { UpdateSessionDto } from '../dto/update-session.dto';
 
@@ -15,9 +15,7 @@ export class SessionService {
   getOne(id: number): Session {
     const session = this.server.find((session) => session.id === id);
     if (!session) {
-      throw new InternalServerErrorException(
-        '서버 오류로 값을 가져올 수 없습니다.',
-      );
+      throw new NotFoundException(`${id}번 세션서버 정보를 찾을 수 없습니다.`);
     }
     return session;
   }
@@ -32,9 +30,7 @@ export class SessionService {
   delete(id: number) {
     const deleteData = this.getOne(id);
     if (!deleteData) {
-      throw new InternalServerErrorException(
-        '서버 오류로 값을 가져올 수 없습니다.',
-      );
+      throw new NotFoundException(`${id}번 세션서버 정보를 찾을 수 없습니다.`);
     } else {
       this.server = this.server.filter((session) => session.id !== id);
     }

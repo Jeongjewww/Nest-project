@@ -9,6 +9,10 @@ import {
 } from 'class-validator';
 
 export class CreateSessionDto {
+  @IsNumber()
+  @IsNotEmpty()
+  id: number;
+
   @IsString()
   @IsNotEmpty()
   sessionServer: string;

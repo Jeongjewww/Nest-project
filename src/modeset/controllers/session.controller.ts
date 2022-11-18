@@ -8,8 +8,9 @@ import {
   Delete,
   UsePipes,
   ValidationPipe,
+  ParseIntPipe,
 } from '@nestjs/common';
-import { Session } from 'src/session/entities/session.entity';
+import { Session } from 'src/modeset/entities/session.entity';
 import { CreateSessionDto } from '../dto/create-session.dto';
 import { UpdateSessionDto } from '../dto/update-session.dto';
 import { SessionService } from '../services/session.service';
@@ -24,7 +25,7 @@ export class SessionController {
   }
 
   @Get('/:id')
-  getOneSession(@Param('id') sessionId: number): Session {
+  getOneSession(@Param('id', ParseIntPipe) sessionId: number): Session {
     return this.sessionServer.getOne(sessionId);
   }
 
@@ -36,7 +37,7 @@ export class SessionController {
   }
 
   @Delete('/:id')
-  deleteSession(@Param('id') sessionId: number) {
+  deleteSession(@Param('id') sessionId: number): void {
     return this.sessionServer.delete(sessionId);
   }
 
