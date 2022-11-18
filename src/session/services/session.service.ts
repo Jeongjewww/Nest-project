@@ -42,7 +42,7 @@ export class SessionService {
 
   update(id: number, updateData: UpdateSessionDto) {
     const oneSession = this.getOne(id);
-    this.delete(id); // 기존데이터 삭제할 경우
+    this.delete(id);
     this.server.push({ ...oneSession, ...updateData });
   }
 }
