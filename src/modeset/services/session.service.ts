@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from 'src/modeset/entities/session.entity';
 import { CreateSessionDto } from '../dto/create-session.dto';
 import { UpdateSessionDto } from '../dto/update-session.dto';
+import { SessionRepository } from '../repositories/session.repository';
 
 @Injectable()
 export class SessionService {
