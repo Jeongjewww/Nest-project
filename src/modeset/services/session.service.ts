@@ -26,25 +26,28 @@ export class SessionService {
     return session;
   }
 
-  // create(sessionData: CreateSessionDto) {
-  //   this.server.push({
-  //     id: this.server.length + 1,
-  //     ...sessionData,
-  //   });
-  // }
+  async create(sessionData: CreateSessionDto) {
+    const newSession = this.sessionRepository.create(sessionData);
 
-  // delete(id: number) {
-  //   const deleteData = this.getOne(id);
-  //   if (!deleteData) {
-  //     throw new NotFoundException(`${id}번 세션서버 정보를 찾을 수 없습니다.`);
-  //   } else {
-  //     this.server = this.server.filter((session) => session.id !== id);
-  //   }
-  // }
+    await this.sessionRepository.save(newSession);
+  }
 
-  // update(id: number, updateData: UpdateSessionDto) {
-  //   const oneSession = this.getOne(id);
-  //   this.delete(id);
-  //   this.server.push({ ...oneSession, ...updateData });
-  // }
+  async delete(id: number): Promise<void> {
+    const deleteData = this.getOne(id);
+    if (!deleteData) {
+      throw new NotFoundException(`${id}번 세션서버 정보를 찾을 수 없습니다.`);
+    } else {
+      await this.sessionRepository.delete(id);
+    }
+  }
+
+  async update(id: number, updateData: UpdateSessionDto): Promise<void> {
+    const updateSession = await this.getOne(id);
+
+    if (!updateSession) {
+      throw new NotFoundException(`${id}번 세션서버 정보를 찾을 수 없습니다.`);
+    } else {
+      await this.sessionRepository.save(updateData);
+    }
+  }
 }

@@ -32,22 +32,24 @@ export class SessionController {
   }
 
   // 전체 데이터 추가
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // createSession(@Body(ValidationPipe) sessionData: CreateSessionDto) {
-  //   return this.sessionServer.create(sessionData);
-  // }
+  @Post()
+  @UsePipes(ValidationPipe)
+  createSession(
+    @Body(ValidationPipe) sessionData: CreateSessionDto,
+  ): Promise<void> {
+    return this.sessionServer.create(sessionData);
+  }
 
-  // @Delete('/:id')
-  // deleteSession(@Param('id') sessionId: number): void {
-  //   return this.sessionServer.delete(sessionId);
-  // }
+  @Delete('/:id')
+  deleteSession(@Param('id', ParseIntPipe) sessionId: number): Promise<void> {
+    return this.sessionServer.delete(sessionId);
+  }
 
-  // @Patch('/:id')
-  // updateSession(
-  //   @Param('id') sessionId: number,
-  //   @Body() updateData: UpdateSessionDto,
-  // ) {
-  //   return this.sessionServer.update(sessionId, updateData);
-  // }
+  @Patch('/:id')
+  updateSession(
+    @Param('id', ParseIntPipe) sessionId: number,
+    @Body() updateData: UpdateSessionDto,
+  ): Promise<void> {
+    return this.sessionServer.update(+sessionId, updateData);
+  }
 }

@@ -35,7 +35,7 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 # individual file
-data.json
+test-data.json
 .development.env
 .vscode
 .CloudUI.session.sql
