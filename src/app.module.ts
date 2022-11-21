@@ -4,6 +4,8 @@ import { SessionModule } from './modeset/session.module';
 import { Session } from './modeset/entities/session.entity';
 import { ConfigModule } from '@nestjs/config';
 import { LoggerMiddleware } from './logger/logger.middleware';
+import { TypeOrmExModule } from './modeset/typeorm-ex.module';
+import { SessionRepository } from './modeset/repositories/session.repository';
 
 @Module({
   imports: [
@@ -22,6 +24,7 @@ import { LoggerMiddleware } from './logger/logger.middleware';
       synchronize: false,
       logging: true,
     }),
+    TypeOrmExModule.forCustomRepository([SessionRepository]),
   ],
   controllers: [],
   providers: [],

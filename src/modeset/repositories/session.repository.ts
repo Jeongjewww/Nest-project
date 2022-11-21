@@ -1,7 +1,6 @@
-import { SetMetadata } from '@nestjs/common';
+import { Session } from 'inspector';
+import { Repository } from 'typeorm';
+import { CustomRepository } from '../typeorm-ex.decorator';
 
-export const TYPEORM_EX_CUSTOM_REPOSITORY = 'TYPEORM_EX_CUSTOM_REPOSITORY';
-
-export function CustomRepository(entity: Function): ClassDecorator {
-  return SetMetadata(TYPEORM_EX_CUSTOM_REPOSITORY, entity);
-}
+@CustomRepository(Session)
+export class SessionRepository extends Repository<Session> {}
