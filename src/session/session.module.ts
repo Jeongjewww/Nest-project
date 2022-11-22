@@ -15,6 +15,6 @@ import { TypeOrmExModule } from './typeorm-ex.module';
   ],
   controllers: [SessionController],
   providers: [SessionService],
-  // exports: [SessionService],
+  exports: [SessionService],
 })
 export class SessionModule {}

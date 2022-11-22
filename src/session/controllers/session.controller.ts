@@ -9,13 +9,16 @@ import {
   UsePipes,
   ValidationPipe,
   ParseIntPipe,
+  UseInterceptors,
 } from '@nestjs/common';
-import { Session } from 'src/modeset/entities/session.entity';
+import { SuccessInterceptor } from 'src/interceptors/success.interceptor';
+import { Session } from 'src/session/entities/session.entity';
 import { CreateSessionDto } from '../dto/create-session.dto';
 import { UpdateSessionDto } from '../dto/update-session.dto';
 import { SessionService } from '../services/session.service';
 
 @Controller('session')
+@UseInterceptors(SuccessInterceptor)
 export class SessionController {
   constructor(private readonly sessionServer: SessionService) {}
 
@@ -31,7 +34,6 @@ export class SessionController {
     return await this.sessionServer.getOne(sessionId);
   }
 
-  // 전체 데이터 추가
   @Post()
   @UsePipes(ValidationPipe)
   createSession(
