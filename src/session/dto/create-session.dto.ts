@@ -15,7 +15,7 @@ export class CreateSessionDto {
 
   @IsString()
   @IsNotEmpty()
-  sessionServer: string;
+  serverName: string;
 
   @IsIP()
   @IsOptional()

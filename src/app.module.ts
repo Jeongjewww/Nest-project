@@ -1,11 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SessionModule } from './modeset/session.module';
-import { Session } from './modeset/entities/session.entity';
+import { SessionModule } from './session/session.module';
+import { Session } from './session/entities/session.entity';
 import { ConfigModule } from '@nestjs/config';
-import { LoggerMiddleware } from './logger/logger.middleware';
-import { TypeOrmExModule } from './modeset/typeorm-ex.module';
-import { SessionRepository } from './modeset/repositories/session.repository';
+import { TypeOrmExModule } from './session/typeorm-ex.module';
+import { SessionRepository } from './session/repositories/session.repository';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 @Module({
   imports: [

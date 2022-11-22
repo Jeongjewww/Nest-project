@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Session } from 'src/modeset/entities/session.entity';
+import { Session } from 'src/session/entities/session.entity';
 import { Repository } from 'typeorm';
 import { CreateSessionDto } from '../dto/create-session.dto';
 import { UpdateSessionDto } from '../dto/update-session.dto';
@@ -11,8 +11,6 @@ export class SessionService {
     @InjectRepository(Session)
     private sessionRepository: Repository<Session>,
   ) {}
-
-  // private server: Session[] = [];
 
   getAll(): Promise<Session[]> {
     return this.sessionRepository.find();
