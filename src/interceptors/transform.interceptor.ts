@@ -3,11 +3,12 @@ import {
   ExecutionContext,
   Injectable,
   NestInterceptor,
+  Response,
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
 @Injectable()
-export class SuccessInterceptor implements NestInterceptor {
+export class TransformInterceptor implements NestInterceptor {
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>,
@@ -16,8 +17,8 @@ export class SuccessInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       map((data) => ({
-        success: true,
-        data,
+        success: context.switchToHttp().getResponse().statusCode,
+        sessionServer: data,
       })),
     );
   }

@@ -11,14 +11,14 @@ import {
   ParseIntPipe,
   UseInterceptors,
 } from '@nestjs/common';
-import { SuccessInterceptor } from 'src/interceptors/success.interceptor';
+import { TransformInterceptor } from 'src/interceptors/transform.interceptor';
 import { Session } from 'src/session/entities/session.entity';
 import { CreateSessionDto } from '../dto/create-session.dto';
 import { UpdateSessionDto } from '../dto/update-session.dto';
 import { SessionService } from '../services/session.service';
 
 @Controller('session')
-@UseInterceptors(SuccessInterceptor)
+@UseInterceptors(TransformInterceptor)
 export class SessionController {
   constructor(private readonly sessionServer: SessionService) {}
 

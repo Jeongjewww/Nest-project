@@ -6,7 +6,7 @@ export class Session {
   id: number;
 
   @Column()
-  sessionServer: string;
+  serverName: string;
 
   @Column({ nullable: true })
   privateIp: string;
