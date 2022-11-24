@@ -2,10 +2,11 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SessionModule } from './session/session.module';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmExModule } from './session/typeorm-ex.module';
+import { TypeOrmExModule } from './typeorm-ex.module';
 import { SessionRepository } from './session/repositories/session.repository';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { ormConfig } from './orm.config';
+import { ServiceModule } from './service/service.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ormConfig } from './orm.config';
     }),
     TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
     TypeOrmExModule.forCustomRepository([SessionRepository]),
+    ServiceModule,
   ],
   controllers: [],
   providers: [],
