@@ -52,6 +52,6 @@ export class SessionController {
     @Param('id', ParseIntPipe) sessionId: number,
     @Body() updateData: UpdateSessionDto,
   ): Promise<void> {
-    return this.sessionServer.update(+sessionId, updateData);
+    return this.sessionServer.update(sessionId, updateData);
   }
 }
