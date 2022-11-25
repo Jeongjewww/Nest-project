@@ -3,7 +3,10 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 function ormConfig(): TypeOrmModuleOptions {
   const commonConf = {
     SYNCHRONIZE: false,
-    ENTITIES: [__dirname + '/session/entities//*.entity{.ts,.js}'],
+    ENTITIES: [
+      __dirname + '/session/entities//*.entity{.ts,.js}',
+      __dirname + '/service/entities//*.entity{.ts,.js}',
+    ],
     MIGRATIONS_TABLE_NAME: 'migrations',
     MIGRATIONS: [__dirname + '/src/migrations/**/*{.ts,.js}'],
     // CLI: {
