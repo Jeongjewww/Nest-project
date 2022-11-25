@@ -1,5 +1,6 @@
 import { Session } from '@nestjs/common';
 import { DataSource } from 'typeorm';
+import { Service } from './service/entities/service.entity';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
@@ -8,7 +9,7 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASSWD,
   database: process.env.DB_DATABASE,
-  entities: [Session],
+  entities: [Session, Service],
   synchronize: false,
   logging: true,
 });

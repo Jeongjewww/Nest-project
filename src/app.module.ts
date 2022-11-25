@@ -7,6 +7,8 @@ import { SessionRepository } from './session/repositories/session.repository';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { ormConfig } from './orm.config';
 import { ServiceModule } from './service/service.module';
+import { ModesetModule } from './modeset/modeset.module';
+import { ServiceRepository } from './service/repositories/service.repository';
 
 @Module({
   imports: [
@@ -16,8 +18,9 @@ import { ServiceModule } from './service/service.module';
       envFilePath: ['.development.env'],
     }),
     TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
-    TypeOrmExModule.forCustomRepository([SessionRepository]),
+    TypeOrmExModule.forCustomRepository([SessionRepository, ServiceRepository]),
     ServiceModule,
+    ModesetModule,
   ],
   controllers: [],
   providers: [],
