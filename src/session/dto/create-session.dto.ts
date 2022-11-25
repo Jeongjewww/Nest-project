@@ -11,7 +11,7 @@ import {
 export class CreateSessionDto {
   @IsString()
   @IsNotEmpty()
-  serverName: string;
+  sessionName: string;
 
   @IsIP()
   @IsOptional()

@@ -11,7 +11,7 @@ import {
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
-  serverName: string;
+  serviceName: string;
 
   @IsString()
   @IsNotEmpty()
