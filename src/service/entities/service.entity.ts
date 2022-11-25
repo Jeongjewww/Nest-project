@@ -6,7 +6,7 @@ export class Service {
   id: number;
 
   @Column()
-  serverName: string;
+  serviceName: string;
 
   @Column()
   network: string;
