@@ -49,6 +49,6 @@ export class CreateServiceDto {
   @IsOptional()
   delete: boolean;
 
-  @IsNumber()
-  refCnt: number;
+  // @IsNumber()
+  // refCnt: number;
 }
