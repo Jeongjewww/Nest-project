@@ -11,7 +11,7 @@ import {
 export class CreateSessionDto {
   @IsString()
   @IsNotEmpty()
-  serverName: string;
+  sessionName: string;
 
   @IsIP()
   @IsOptional()
@@ -49,6 +49,6 @@ export class CreateSessionDto {
   @IsOptional()
   delete: boolean;
 
-  // @IsNumber()
-  // refCnt: number;
+  @IsNumber()
+  refCnt: number;
 }

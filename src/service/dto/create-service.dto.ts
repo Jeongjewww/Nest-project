@@ -11,7 +11,7 @@ import {
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
-  serverName: string;
+  serviceName: string;
 
   @IsString()
   @IsNotEmpty()
@@ -49,6 +49,6 @@ export class CreateServiceDto {
   @IsOptional()
   delete: boolean;
 
-  // @IsNumber()
-  // refCnt: number;
+  @IsNumber()
+  refCnt: number;
 }

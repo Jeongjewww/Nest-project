@@ -1,12 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity('session_server')
 export class Session {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column()
-  serverName: string;
+  sessionName: string;
 
   @Column({ nullable: true })
   privateIp: string;
@@ -23,18 +29,18 @@ export class Session {
   @Column({ nullable: true })
   createSub: string;
 
-  @Column({ nullable: true })
+  @CreateDateColumn({ nullable: true })
   createDate: Date;
 
   @Column({ nullable: true })
   updateSub: string;
 
-  @Column({ nullable: true })
+  @UpdateDateColumn({ nullable: true })
   updateDate: Date;
 
   @Column({ default: false })
   delete: boolean;
 
-  // @Column({ default: 0 })
-  // refCnt: number;
+  @Column({ default: 0 })
+  refCnt: number;
 }
