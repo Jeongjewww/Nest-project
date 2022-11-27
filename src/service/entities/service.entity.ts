@@ -1,10 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Service {
@@ -29,18 +23,18 @@ export class Service {
   @Column({ nullable: true })
   createSub: string;
 
-  @CreateDateColumn({ nullable: true })
+  @Column({ nullable: true })
   createDate: Date;
 
   @Column({ nullable: true })
   updateSub: string;
 
-  @UpdateDateColumn({ nullable: true })
+  @Column({ nullable: true })
   updateDate: Date;
 
   @Column({ default: false })
   delete: boolean;
 
-  @Column({ default: 0 })
-  refCnt: number;
+  // @Column({ default: 0 })
+  // refCnt: number;
 }
