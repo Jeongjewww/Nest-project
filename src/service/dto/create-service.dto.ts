@@ -14,7 +14,6 @@ export class CreateServiceDto {
   serviceName: string;
 
   @IsString()
-  @IsNotEmpty()
   network: string;
 
   @IsIP()
@@ -48,7 +47,4 @@ export class CreateServiceDto {
   @IsBoolean()
   @IsOptional()
   delete: boolean;
-
-  // @IsNumber()
-  // refCnt: number;
 }

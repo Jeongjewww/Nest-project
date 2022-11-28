@@ -1,6 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Unique,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity('session_server')
+@Unique(['sessionName'])
 export class Session {
   @PrimaryGeneratedColumn('increment')
   id: number;

@@ -2,47 +2,48 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import { ModeAppId } from './modeAppId.entity';
 
-@Entity('service_server')
-@Unique(['serviceName'])
-export class Service {
+@Entity('modeset_list')
+@Unique(['modeId'])
+export class ModesetList {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
-  serviceName: string;
+  @PrimaryColumn()
+  modeId: string;
 
   @Column()
-  network: string;
+  modeName: string;
 
-  @Column({ nullable: true })
-  ip: string;
+  @Column()
+  desc: string;
 
-  @Column({ nullable: true })
-  port: number;
-
-  @Column({ nullable: true })
-  inspectorPort: number;
+  @OneToMany(() => ModeAppId, (liveAppId) => liveAppId.modeAppId)
+  liveAppIds: ModeAppId[];
 
   @Column({ nullable: true })
   createSub: string;
 
-  @Column({ nullable: true })
+  @CreateDateColumn({ nullable: true })
   createDate: Date;
 
   @Column({ nullable: true })
   updateSub: string;
 
-  @Column({ nullable: true })
+  @UpdateDateColumn({ nullable: true })
   updateDate: Date;
 
   @Column({ default: false })
   delete: boolean;
-  
+
   @Column({ default: 0 })
   refCnt: number;
 }
