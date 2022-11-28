@@ -33,7 +33,7 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       password: process.env.DB_PASSWD,
       database: process.env.DB_DATABASE,
       entities: [Session, Service, LiveAppId, ModesetList, ModeAppId],
-      synchronize: true,
+      synchronize: false,
       logging: true,
     }),
     TypeOrmExModule.forCustomRepository([
