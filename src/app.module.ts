@@ -20,7 +20,6 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
 
 @Module({
   imports: [
-    SessionModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.development.env'],
@@ -43,6 +42,7 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       ModesetListRepository,
       ModeAppRepository,
     ]),
+    SessionModule,
     ServiceModule,
     ModesetModule,
     LiveappModule,
