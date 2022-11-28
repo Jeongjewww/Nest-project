@@ -20,7 +20,6 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
 
 @Module({
   imports: [
-    SessionModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.development.env'],
@@ -33,7 +32,7 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       password: process.env.DB_PASSWD,
       database: process.env.DB_DATABASE,
       entities: [Session, Service, LiveAppId, ModesetList, ModeAppId],
-      synchronize: true,
+      synchronize: false,
       logging: true,
     }),
     TypeOrmExModule.forCustomRepository([
@@ -43,6 +42,7 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       ModesetListRepository,
       ModeAppRepository,
     ]),
+    SessionModule,
     ServiceModule,
     ModesetModule,
     LiveappModule,
