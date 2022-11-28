@@ -3,10 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  Unique,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('service_server')
+@Unique(['serviceName'])
 export class Service {
   @PrimaryGeneratedColumn('increment')
   id: number;

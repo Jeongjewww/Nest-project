@@ -48,7 +48,4 @@ export class CreateSessionDto {
   @IsBoolean()
   @IsOptional()
   delete: boolean;
-
-  @IsNumber()
-  refCnt: number;
 }

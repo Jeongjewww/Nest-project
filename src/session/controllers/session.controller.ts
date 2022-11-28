@@ -36,22 +36,24 @@ export class SessionController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  createSession(
+  async createSession(
     @Body(ValidationPipe) sessionData: CreateSessionDto,
   ): Promise<void> {
-    return this.sessionServer.create(sessionData);
+    return await this.sessionServer.create(sessionData);
   }
 
   @Delete('/:id')
-  deleteSession(@Param('id', ParseIntPipe) sessionId: number): Promise<void> {
-    return this.sessionServer.delete(sessionId);
+  async deleteSession(
+    @Param('id', ParseIntPipe) sessionId: number,
+  ): Promise<void> {
+    return await this.sessionServer.delete(sessionId);
   }
 
   @Patch('/:id')
-  updateSession(
+  async updateSession(
     @Param('id', ParseIntPipe) sessionId: number,
     @Body() updateData: UpdateSessionDto,
   ): Promise<void> {
-    return this.sessionServer.update(sessionId, updateData);
+    return await this.sessionServer.update(sessionId, updateData);
   }
 }
