@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from 'src/session/entities/session.entity';
-import { JoinColumn, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateSessionDto } from '../dto/create-session.dto';
 import { UpdateSessionDto } from '../dto/update-session.dto';
 
@@ -43,7 +43,6 @@ export class SessionService {
   // unique value validation
   async update(id: number, updateData: UpdateSessionDto): Promise<void> {
     const updateSession = await this.getOne(id);
-    // const duplicated = await this.sessionRepository;
 
     if (!updateSession) {
       throw new NotFoundException(`${id}번 세션서버 정보를 찾을 수 없습니다.`);
