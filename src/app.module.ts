@@ -17,6 +17,8 @@ import { ModeAppRepository } from './modeset/repositories/modeapp.repository';
 import { LiveAppId } from './liveapp/entities/LiveAppId.entity';
 import { ModesetList } from './modeset/entities/modesetList.entity';
 import { ModeAppId } from './modeset/entities/modeAppId.entity';
+import { ModesetJson } from './modeset/entities/modesetJson.entity';
+import { ModesetJsonRepository } from './modeset/repositories/modesetjson.repository';
 
 @Module({
   imports: [
@@ -31,7 +33,14 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWD,
       database: process.env.DB_DATABASE,
-      entities: [Session, Service, LiveAppId, ModesetList, ModeAppId],
+      entities: [
+        Session,
+        Service,
+        LiveAppId,
+        ModesetList,
+        ModeAppId,
+        ModesetJson,
+      ],
       synchronize: false,
       logging: true,
     }),
@@ -41,6 +50,7 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       LiveAppRepository,
       ModesetListRepository,
       ModeAppRepository,
+      ModesetJsonRepository,
     ]),
     SessionModule,
     ServiceModule,

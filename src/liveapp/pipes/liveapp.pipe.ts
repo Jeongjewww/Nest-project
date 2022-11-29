@@ -8,7 +8,7 @@ import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 
 @Injectable()
-export class ModesetPipe implements PipeTransform {
+export class LiveAppPipe implements PipeTransform {
   async transform(value: any, metadata: ArgumentMetadata) {
     const metatype = metadata.metatype;
     if (!metatype || !this.toValidate(metatype)) return value;
