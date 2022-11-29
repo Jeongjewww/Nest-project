@@ -41,6 +41,9 @@ export class ModesetList {
   @UpdateDateColumn({ nullable: true })
   updateDate: Date;
 
+  @Column({ default: 0 })
+  activation: boolean;
+
   @Column({ default: false })
   delete: boolean;
 

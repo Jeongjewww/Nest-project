@@ -17,10 +17,11 @@ import { ModeAppRepository } from './modeset/repositories/modeapp.repository';
 import { LiveAppId } from './liveapp/entities/LiveAppId.entity';
 import { ModesetList } from './modeset/entities/modesetList.entity';
 import { ModeAppId } from './modeset/entities/modeAppId.entity';
+import { ModesetJson } from './modeset/entities/modesetJson.entity';
+import { ModesetJsonRepository } from './modeset/repositories/modesetjson.repository';
 
 @Module({
   imports: [
-    SessionModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.development.env'],
@@ -32,8 +33,15 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWD,
       database: process.env.DB_DATABASE,
-      entities: [Session, Service, LiveAppId, ModesetList, ModeAppId],
-      synchronize: true,
+      entities: [
+        Session,
+        Service,
+        LiveAppId,
+        ModesetList,
+        ModeAppId,
+        ModesetJson,
+      ],
+      synchronize: false,
       logging: true,
     }),
     TypeOrmExModule.forCustomRepository([
@@ -42,7 +50,9 @@ import { ModeAppId } from './modeset/entities/modeAppId.entity';
       LiveAppRepository,
       ModesetListRepository,
       ModeAppRepository,
+      ModesetJsonRepository,
     ]),
+    SessionModule,
     ServiceModule,
     ModesetModule,
     LiveappModule,
