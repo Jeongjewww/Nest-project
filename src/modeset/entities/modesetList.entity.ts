@@ -2,31 +2,32 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import { ModeAppId } from './modeAppId.entity';
 
-@Entity('session_server')
-@Unique(['sessionName'])
-export class Session {
+@Entity('modeset_list')
+@Unique(['modeId'])
+export class ModesetList {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
+  @PrimaryColumn()
+  modeId: string;
+
   @Column()
-  sessionName: string;
+  modeName: string;
 
-  @Column({ nullable: true })
-  privateIp: string;
+  @Column()
+  desc: string;
 
-  @Column({ nullable: true })
-  privatePort: number;
-
-  @Column({ nullable: true })
-  publicIp: string;
-
-  @Column({ nullable: true })
-  publicPort: number;
+  @OneToMany(() => ModeAppId, (liveAppId) => liveAppId.modeAppId)
+  liveAppIds: ModeAppId[];
 
   @Column({ nullable: true })
   createSub: string;

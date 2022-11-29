@@ -12,8 +12,8 @@ export class SessionService {
     private sessionRepository: Repository<Session>,
   ) {}
 
-  getAll(): Promise<Session[]> {
-    return this.sessionRepository.find();
+  async getAll(): Promise<Session[]> {
+    return await this.sessionRepository.find();
   }
 
   async getOne(id: number): Promise<Session> {
@@ -30,6 +30,7 @@ export class SessionService {
     await this.sessionRepository.save(newSession);
   }
 
+  // 추가: delete값을 1로 바꿔주기
   async delete(id: number): Promise<void> {
     const deleteData = this.getOne(id);
     if (!deleteData) {
@@ -39,6 +40,7 @@ export class SessionService {
     }
   }
 
+  // unique value validation
   async update(id: number, updateData: UpdateSessionDto): Promise<void> {
     const updateSession = await this.getOne(id);
 

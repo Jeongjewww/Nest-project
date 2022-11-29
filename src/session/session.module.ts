@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SessionController } from './controllers/session.controller';
 import { SessionRepository } from './repositories/session.repository';
 import { SessionService } from './services/session.service';
-import { TypeOrmExModule } from './typeorm-ex.module';
+import { TypeOrmExModule } from '../typeorm-ex.module';
 
 @Module({
   imports: [

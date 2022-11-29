@@ -8,26 +8,25 @@ import {
   IsString,
 } from 'class-validator';
 
-export class CreateSessionDto {
+export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
-  sessionName: string;
+  serviceName: string;
+
+  @IsString()
+  network: string;
 
   @IsIP()
   @IsOptional()
-  privateIp: string;
+  ip: string;
 
   @IsNumber()
   @IsOptional()
-  privatePort: number;
-
-  @IsIP()
-  @IsOptional()
-  publicIp: string;
+  port: number;
 
   @IsNumber()
   @IsOptional()
-  publicPort: number;
+  inspectorPort: number;
 
   @IsString()
   @IsOptional()

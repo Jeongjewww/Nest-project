@@ -7,26 +7,26 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('session_server')
-@Unique(['sessionName'])
-export class Session {
+@Entity('service_server')
+@Unique(['serviceName'])
+export class Service {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
   @Column()
-  sessionName: string;
+  serviceName: string;
+
+  @Column()
+  network: string;
 
   @Column({ nullable: true })
-  privateIp: string;
+  ip: string;
 
   @Column({ nullable: true })
-  privatePort: number;
+  port: number;
 
   @Column({ nullable: true })
-  publicIp: string;
-
-  @Column({ nullable: true })
-  publicPort: number;
+  inspectorPort: number;
 
   @Column({ nullable: true })
   createSub: string;
