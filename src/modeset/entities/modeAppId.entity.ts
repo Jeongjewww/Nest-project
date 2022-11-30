@@ -9,6 +9,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 import { ModesetList } from './modesetList.entity';
+import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
 
 @Entity('mode_app_id')
 export class ModeAppId {
@@ -21,7 +22,7 @@ export class ModeAppId {
   @ManyToOne(() => ModesetList, (liveAppId) => liveAppId.liveAppIds, {
     onDelete: 'SET NULL',
   })
-  liveAppId: string[];
+  liveAppId: LiveAppId;
 
   @Column()
   modeAppId: string;
@@ -29,11 +30,11 @@ export class ModeAppId {
   @Column()
   debug: boolean;
 
-  @OneToOne(() => Service, { onDelete: 'SET NULL' })
+  @OneToOne(() => Session, { onDelete: 'SET NULL' })
   @JoinColumn()
   sessionName: Session;
 
-  @OneToOne(() => Session, { onDelete: 'SET NULL' })
+  @OneToOne(() => Service, { onDelete: 'SET NULL' })
   @JoinColumn()
   serviceName: Service;
 }
