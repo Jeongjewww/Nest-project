@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   Unique,
@@ -40,9 +41,15 @@ export class Service {
   @Column({ nullable: true })
   updateDate: Date;
 
+<<<<<<< Updated upstream
   @Column({ default: false })
   delete: boolean;
   
+=======
+>>>>>>> Stashed changes
   @Column({ default: 0 })
   refCnt: number;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

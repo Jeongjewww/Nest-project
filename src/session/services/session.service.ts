@@ -43,9 +43,24 @@ export class SessionService {
     }
   }
 
+<<<<<<< Updated upstream
   // unique value validation
   // async update(queryData: any, updateData: UpdateSessionDto): Promise<void> {
   //   for (var i = 0; i < queryData.id.length; i++) {
+=======
+  async delete(idList: string[]): Promise<void> {
+    for (const id in idList) {
+      try {
+        await this.sessionRepository.softDelete(idList[id]);
+      } catch (err) {
+        throw new InternalServerErrorException('데이터를 삭제할 수 없습니다.', {
+          cause: new Error(),
+          description: '데이터가 존재하지 않습니다.',
+        });
+      }
+    }
+  }
+>>>>>>> Stashed changes
 
   //     const updateSession = updateData;
   //     await this.sessionRepository.save(updateData);

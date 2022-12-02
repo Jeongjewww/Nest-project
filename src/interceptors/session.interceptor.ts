@@ -7,7 +7,7 @@ import {
 import { map, Observable } from 'rxjs';
 
 @Injectable()
-export class TransformInterceptor implements NestInterceptor {
+export class SessionInterceptor implements NestInterceptor {
   intercept(
     context: ExecutionContext,
     next: CallHandler<any>,
