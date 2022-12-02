@@ -42,7 +42,6 @@ export class SessionService extends TypeOrmQueryService<Session> {
     }
   }
 
-  // delete = true -> save json file
   async delete(idList: string[]): Promise<void> {
     for (const id in idList) {
       try {

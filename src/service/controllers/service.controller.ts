@@ -8,15 +8,18 @@ import {
   Patch,
   Post,
   Query,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { ServiceInterceptor } from 'src/interceptors/service.interceptor';
 import { CreateServiceDto } from '../dto/create-service.dto';
 import { UpdateServiceDto } from '../dto/update-service.dto';
 import { Service } from '../entities/service.entity';
 import { ServiceService } from '../services/service.service';
 
 @Controller('service')
+@UseInterceptors(ServiceInterceptor)
 export class ServiceController {
   constructor(private readonly serviceServer: ServiceService) {}
 
@@ -25,12 +28,12 @@ export class ServiceController {
     return await this.serviceServer.getAll();
   }
 
-  @Get('/each')
-  async getOneService(
-    @Query('id', ParseIntPipe) serviceId: number,
-  ): Promise<Service> {
-    return await this.serviceServer.getOne(serviceId);
-  }
+  // @Get('/each')
+  // async getOneService(
+  //   @Query('id', ParseIntPipe) serviceId: number,
+  // ): Promise<Service> {
+  //   return await this.serviceServer.getOne(serviceId);
+  // }
 
   @Post()
   @UsePipes(ValidationPipe)
@@ -41,10 +44,11 @@ export class ServiceController {
   }
 
   @Delete()
-  async deleteService(@Query() queryData: string[]): Promise<void> {
-    return this.serviceServer.delete(queryData);
+  async deleteService(@Query() idList: string[]): Promise<void> {
+    return this.serviceServer.delete(idList);
   }
 
+  // 수정 중
   @Patch('/:id')
   async updateService(
     @Param('id', ParseIntPipe) updateId: number,
