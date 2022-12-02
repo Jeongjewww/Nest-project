@@ -10,6 +10,7 @@ import {
   ValidationPipe,
   ParseIntPipe,
   UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor';
 import { Session } from 'src/session/entities/session.entity';
@@ -42,18 +43,17 @@ export class SessionController {
     return await this.sessionServer.create(sessionData);
   }
 
-  @Delete('/:id')
-  async deleteSession(
-    @Param('id', ParseIntPipe) sessionId: number,
-  ): Promise<void> {
-    return await this.sessionServer.delete(sessionId);
+  @Delete('/')
+  async deleteSession(@Query() queryData: string[]): Promise<void> {
+    return await this.sessionServer.delete(queryData);
   }
 
-  @Patch('/:id')
-  async updateSession(
-    @Param('id', ParseIntPipe) sessionId: number,
-    @Body() updateData: UpdateSessionDto,
-  ): Promise<void> {
-    return await this.sessionServer.update(sessionId, updateData);
+  // @Patch('/')
+  // async updateSession(
+  //   @Query() queryData: any,
+  //   @Body() updateData: UpdateSessionDto,
+  // ): Promise<void> {
+  //   // return await this.sessionServer.update(queryData, updateData);
+  //   console.log(queryData.id);
   }
 }
