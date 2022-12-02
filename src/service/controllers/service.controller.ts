@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -24,28 +25,28 @@ export class ServiceController {
     return await this.serviceServer.getAll();
   }
 
-  @Get('/:id')
+  @Get('/each')
   async getOneService(
-    @Param('id', ParseIntPipe) serviceId: number,
+    @Query('id', ParseIntPipe) serviceId: number,
   ): Promise<Service> {
     return await this.serviceServer.getOne(serviceId);
   }
 
   @Post()
   @UsePipes(ValidationPipe)
-  createService(
+  async createService(
     @Body(ValidationPipe) serviceData: CreateServiceDto,
   ): Promise<void> {
     return this.serviceServer.create(serviceData);
   }
 
   @Delete()
-  deleteService(@Param('id', ParseIntPipe) serviceId: number): Promise<void> {
-    return this.serviceServer.delete(serviceId);
+  async deleteService(@Query() queryData: string[]): Promise<void> {
+    return this.serviceServer.delete(queryData);
   }
 
   @Patch('/:id')
-  updateService(
+  async updateService(
     @Param('id', ParseIntPipe) updateId: number,
     @Body() updateData: UpdateServiceDto,
   ): Promise<void> {

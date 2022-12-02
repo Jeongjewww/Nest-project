@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   Unique,
@@ -40,9 +41,9 @@ export class Session {
   @UpdateDateColumn({ nullable: true })
   updateDate: Date;
 
-  @Column({ default: false })
-  delete: boolean;
-
   @Column({ default: 0 })
   refCnt: number;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

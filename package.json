@@ -25,9 +25,12 @@
     "migrate:revert": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert"
   },
   "dependencies": {
+    "@nestjs-query/query-graphql": "^0.30.0",
+    "@nestjs-query/query-typeorm": "^0.30.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/graphql": "^10.1.6",
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/mapped-types": "^1.2.0",
     "@nestjs/passport": "^9.0.0",

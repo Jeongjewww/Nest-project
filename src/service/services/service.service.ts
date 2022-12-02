@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { SessionQueryDto } from 'src/session/dto/create-session.dto';
 import { Repository } from 'typeorm';
 import { CreateServiceDto } from '../dto/create-service.dto';
 import { UpdateServiceDto } from '../dto/update-service.dto';
@@ -34,14 +33,15 @@ export class ServiceService {
     await this.serviceRepository.save(newService);
   }
 
-  async delete(id: number): Promise<void> {
-    const deleteData = this.getOne(id);
-    if (!deleteData) {
-      throw new NotFoundException(
-        `${id}번 서비스서버 정보를 찾을 수 없습니다.`,
-      );
-    } else {
-      await this.serviceRepository.delete(id);
+  async delete(queryData: string[]): Promise<void> {
+    for (const data in queryData) {
+      if (!queryData[data]) {
+        throw new NotFoundException(
+          `${queryData[data]}번 서비스서버 정보를 찾을 수 없습니다.`,
+        );
+      } else {
+        await this.serviceRepository.delete(queryData[data]);
+      }
     }
   }
 

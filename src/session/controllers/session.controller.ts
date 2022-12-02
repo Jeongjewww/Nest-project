@@ -12,6 +12,7 @@ import {
   UseInterceptors,
   Query,
 } from '@nestjs/common';
+import { identity } from 'rxjs';
 import { TransformInterceptor } from 'src/interceptors/transform.interceptor';
 import { Session } from 'src/session/entities/session.entity';
 import { CreateSessionDto } from '../dto/create-session.dto';
@@ -28,13 +29,6 @@ export class SessionController {
     return await this.sessionServer.getAll();
   }
 
-  @Get('/:id')
-  async getOneSession(
-    @Param('id', ParseIntPipe) sessionId: number,
-  ): Promise<Session> {
-    return await this.sessionServer.getOne(sessionId);
-  }
-
   @Post()
   @UsePipes(ValidationPipe)
   async createSession(
@@ -44,16 +38,18 @@ export class SessionController {
   }
 
   @Delete('/')
-  async deleteSession(@Query() queryData: string[]): Promise<void> {
-    return await this.sessionServer.delete(queryData);
+  async deleteSession(@Query() idList: string[]): Promise<void> {
+    return await this.sessionServer.delete(idList);
   }
 
-  // @Patch('/')
-  // async updateSession(
-  //   @Query() queryData: any,
-  //   @Body() updateData: UpdateSessionDto,
-  // ): Promise<void> {
-  //   // return await this.sessionServer.update(queryData, updateData);
-  //   console.log(queryData.id);
+  // 수정 중
+  @Patch('/')
+  async updateSession(
+    @Query() id: number[],
+    @Body() updateData: UpdateSessionDto[],
+  ): Promise<void> {
+    console.log(id);
+    console.log(updateData);
+    return await this.sessionServer.update(id, updateData);
   }
 }
