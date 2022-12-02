@@ -23,7 +23,14 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({
+<<<<<<< Updated upstream
     origin: 'http://localhost:3000', // insert url
+=======
+    origin: '*', // insert url
+    methods: 'GET,POST,DELETE,PATCH',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+>>>>>>> Stashed changes
   });
   await app.listen(3000);
 }

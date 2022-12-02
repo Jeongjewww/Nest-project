@@ -11,6 +11,7 @@ import {
 import { ModesetList } from './modesetList.entity';
 import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
 
+// ModeAppId - liveAppId (6) || ModesetList - modeId (1)
 @Entity('mode_app_id')
 export class ModeAppId {
   @PrimaryColumn({ primary: false })
