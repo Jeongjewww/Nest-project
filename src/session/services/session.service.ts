@@ -56,21 +56,21 @@ export class SessionService extends TypeOrmQueryService<Session> {
   }
 
   // 수정 중
-  async update(id: number[], updateData: UpdateSessionDto[]): Promise<void> {
-    // for (var i = 0; i < queryData.id.length; i++) {
-    //   try {
-    //     await this.sessionRepository.save(updateData[i]);
-    //   } catch (err) {
-    //     if (err.code === 'ER_DUP_ENTRY') {
-    //       throw new InternalServerErrorException(
-    //         '데이터를 수정할 수 없습니다.',
-    //         {
-    //           cause: new Error(),
-    //           description: '중복데이터가 존재합니다.',
-    //         },
-    //       );
-    //     }
-    //   }
-    // }
+  async update(idList: any, updateData: UpdateSessionDto[]): Promise<void> {
+    for (var i = 0; i < idList.id.length; i++) {
+      try {
+        await this.sessionRepository.save(updateData[i]);
+      } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+          throw new InternalServerErrorException(
+            '데이터를 수정할 수 없습니다.',
+            {
+              cause: new Error(),
+              description: '중복데이터가 존재합니다.',
+            },
+          );
+        }
+      }
+    }
   }
 }

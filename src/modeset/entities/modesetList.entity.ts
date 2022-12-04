@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   OneToMany,
   PrimaryColumn,
@@ -48,4 +49,7 @@ export class ModesetList {
 
   @Column({ default: 0 })
   refCnt: number;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

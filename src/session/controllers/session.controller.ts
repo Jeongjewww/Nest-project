@@ -29,10 +29,7 @@ export class SessionController {
   }
 
   @Post()
-  @UsePipes(ValidationPipe)
-  async createSession(
-    @Body(ValidationPipe) sessionData: CreateSessionDto,
-  ): Promise<void> {
+  async createSession(@Body() sessionData: CreateSessionDto): Promise<void> {
     return await this.sessionServer.create(sessionData);
   }
 
@@ -44,11 +41,9 @@ export class SessionController {
   // 수정 중
   @Patch('/')
   async updateSession(
-    @Query() id: number[],
+    @Query() idList: any,
     @Body() updateData: UpdateSessionDto[],
   ): Promise<void> {
-    console.log(id);
-    console.log(updateData);
-    return await this.sessionServer.update(id, updateData);
+    return await this.sessionServer.update(idList, updateData);
   }
 }

@@ -23,10 +23,12 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.enableCors({
-    origin: '*', // insert url
+    allowedHeaders: ['Accept', 'Content-Type'],
+    origin: 'http://localhost:3001',
     methods: 'GET,POST,DELETE,PATCH',
     preflightContinue: false,
     optionsSuccessStatus: 204,
+    credentials: true,
   });
   await app.listen(3001);
 }
