@@ -1,18 +1,10 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateServiceDto } from '../dto/create-service.dto';
 import { UpdateServiceDto } from '../dto/update-service.dto';
 import { Service } from '../entities/service.entity';
-import {
-  InjectQueryService,
-  QueryService,
-  RelationQueryService,
-} from '@nestjs-query/core';
+import { QueryService } from '@nestjs-query/core';
 import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
 
 @Injectable()
@@ -55,7 +47,22 @@ export class ServiceService extends TypeOrmQueryService<Service> {
     }
   }
 
-  async update(id: number, updateData: UpdateServiceDto): Promise<void> {
-    // 수정 중
+  async update(idList: any, updateData: UpdateServiceDto[]): Promise<void> {
+    for (var i = 0; i < idList.id.length; i++) {
+      try {
+        await this.serviceRepository.softDelete(idList.id[i]);
+        await this.serviceRepository.save(updateData[i]);
+      } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+          throw new InternalServerErrorException(
+            '데이터를 수정할 수 없습니다.',
+            {
+              cause: new Error(),
+              description: '중복데이터가 존재합니다.',
+            },
+          );
+        }
+      }
+    }
   }
 }

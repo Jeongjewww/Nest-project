@@ -34,7 +34,7 @@ export class SessionController {
     return await this.sessionServer.delete(idList);
   }
 
-  @Patch('/')
+  @Patch('/:id')
   async updateSession(
     @Query() idList: any,
     @Body() updateData: UpdateSessionDto[],

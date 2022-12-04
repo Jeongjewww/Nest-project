@@ -45,14 +45,4 @@ export class CreateSessionDto {
   @IsDate()
   @IsOptional()
   updateDate: Date;
-
-  @IsBoolean()
-  @IsOptional()
-  delete: boolean;
-}
-
-export class SessionQueryDto {
-  @Transform(({ value }) => JSON.parse(value))
-  @IsString({ each: true })
-  readonly queryData: string[];
 }

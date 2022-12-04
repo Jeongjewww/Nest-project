@@ -43,8 +43,4 @@ export class CreateServiceDto {
   @IsDate()
   @IsOptional()
   updateDate: Date;
-
-  @IsBoolean()
-  @IsOptional()
-  delete: boolean;
 }
