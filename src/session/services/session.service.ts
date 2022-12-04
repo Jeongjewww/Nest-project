@@ -1,17 +1,9 @@
-import {
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from 'src/session/entities/session.entity';
 import { Repository } from 'typeorm';
 import { CreateSessionDto } from '../dto/create-session.dto';
-import {
-  InjectQueryService,
-  QueryService,
-  RelationQueryService,
-} from '@nestjs-query/core';
+import { QueryService } from '@nestjs-query/core';
 import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
 import { UpdateSessionDto } from '../dto/update-session.dto';
 
@@ -55,10 +47,10 @@ export class SessionService extends TypeOrmQueryService<Session> {
     }
   }
 
-  // 수정 중
   async update(idList: any, updateData: UpdateSessionDto[]): Promise<void> {
     for (var i = 0; i < idList.id.length; i++) {
       try {
+        await this.sessionRepository.softDelete(idList.id[i]);
         await this.sessionRepository.save(updateData[i]);
       } catch (err) {
         if (err.code === 'ER_DUP_ENTRY') {

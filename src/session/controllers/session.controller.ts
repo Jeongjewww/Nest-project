@@ -4,11 +4,7 @@ import {
   Get,
   Patch,
   Post,
-  Param,
   Delete,
-  UsePipes,
-  ValidationPipe,
-  ParseIntPipe,
   UseInterceptors,
   Query,
 } from '@nestjs/common';
@@ -38,7 +34,6 @@ export class SessionController {
     return await this.sessionServer.delete(idList);
   }
 
-  // 수정 중
   @Patch('/')
   async updateSession(
     @Query() idList: any,
