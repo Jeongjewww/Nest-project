@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  ConsoleLogger,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from 'src/session/entities/session.entity';
 import { Repository } from 'typeorm';
@@ -47,21 +51,20 @@ export class SessionService extends TypeOrmQueryService<Session> {
     }
   }
 
-  async update(idList: any, updateData: UpdateSessionDto[]): Promise<void> {
-    for (var i = 0; i < idList.id.length; i++) {
-      try {
-        await this.sessionRepository.softDelete(idList.id[i]);
+  async update(updateData: UpdateSessionDto[]): Promise<void> {
+    try {
+      // console.log(updateData.length);
+      for (var i = 0; i < updateData.length; i++) {
+        // console.log(updateData[i].id, updateData[i]);
+        await this.sessionRepository.softDelete(updateData[i].id);
         await this.sessionRepository.save(updateData[i]);
-      } catch (err) {
-        if (err.code === 'ER_DUP_ENTRY') {
-          throw new InternalServerErrorException(
-            '데이터를 수정할 수 없습니다.',
-            {
-              cause: new Error(),
-              description: '중복데이터가 존재합니다.',
-            },
-          );
-        }
+      }
+    } catch (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        throw new InternalServerErrorException('데이터를 수정할 수 없습니다.', {
+          cause: new Error(),
+          description: '중복데이터가 존재합니다.',
+        });
       }
     }
   }

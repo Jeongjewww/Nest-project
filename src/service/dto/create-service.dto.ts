@@ -1,5 +1,4 @@
 import {
-  IsBoolean,
   IsDate,
   IsIP,
   IsNotEmpty,
@@ -9,6 +8,9 @@ import {
 } from 'class-validator';
 
 export class CreateServiceDto {
+  @IsNumber()
+  id: number;
+
   @IsString()
   @IsNotEmpty()
   serviceName: string;

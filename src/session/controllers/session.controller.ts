@@ -34,11 +34,9 @@ export class SessionController {
     return await this.sessionServer.delete(idList);
   }
 
-  @Patch('/:id')
-  async updateSession(
-    @Query() idList: any,
-    @Body() updateData: UpdateSessionDto[],
-  ): Promise<void> {
-    return await this.sessionServer.update(idList, updateData);
+  @Patch()
+  async updateSession(@Body() updateData: UpdateSessionDto[]): Promise<void> {
+    // console.log(updateData);
+    return await this.sessionServer.update(updateData);
   }
 }

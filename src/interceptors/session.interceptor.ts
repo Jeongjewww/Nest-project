@@ -12,7 +12,7 @@ export class SessionInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
-    // console.log('test before ctrlr');
+    console.log('test before ctrlr');
 
     return next.handle().pipe(
       map((data) => ({

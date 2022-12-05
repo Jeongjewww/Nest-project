@@ -26,7 +26,7 @@ export class ServiceController {
 
   @Post()
   async createService(@Body() serviceData: CreateServiceDto): Promise<void> {
-    return this.serviceServer.create(serviceData);
+    return await this.serviceServer.create(serviceData);
   }
 
   @Delete()
@@ -34,13 +34,8 @@ export class ServiceController {
     return await this.serviceServer.delete(idList);
   }
 
-  @Patch('/:id')
-  async updateSession(
-    @Query() idList: any,
-    @Body() updateData: UpdateServiceDto[],
-  ): Promise<void> {
-    console.log(idList.id[0]);
-    console.log(updateData);
-    return await this.serviceServer.update(idList, updateData);
+  @Patch()
+  async updateSession(@Body() updateData: UpdateServiceDto[]): Promise<void> {
+    return await this.serviceServer.update(updateData);
   }
 }
