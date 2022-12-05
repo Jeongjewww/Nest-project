@@ -1,6 +1,4 @@
-import { Transform } from 'class-transformer';
 import {
-  IsBoolean,
   IsDate,
   IsIP,
   IsNotEmpty,
@@ -10,6 +8,9 @@ import {
 } from 'class-validator';
 
 export class CreateSessionDto {
+  @IsNumber()
+  id: number;
+
   @IsString()
   @IsNotEmpty()
   sessionName: string;

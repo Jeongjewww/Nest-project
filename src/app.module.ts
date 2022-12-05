@@ -22,6 +22,10 @@ import { ModesetJsonRepository } from './modeset/repositories/modesetjson.reposi
 
 @Module({
   imports: [
+    SessionModule,
+    ServiceModule,
+    ModesetModule,
+    LiveappModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.development.env'],
@@ -52,10 +56,6 @@ import { ModesetJsonRepository } from './modeset/repositories/modesetjson.reposi
       ModeAppRepository,
       ModesetJsonRepository,
     ]),
-    SessionModule,
-    ServiceModule,
-    ModesetModule,
-    LiveappModule,
   ],
   controllers: [],
   providers: [],

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { Session } from './entities/session.entity';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmExModule } from 'src/typeorm-ex.module';
 import { SessionController } from './controllers/session.controller';
+import { Session } from './entities/session.entity';
 import { SessionRepository } from './repositories/session.repository';
 import { SessionService } from './services/session.service';
-import { TypeOrmExModule } from '../typeorm-ex.module';
 
 @Module({
   imports: [
@@ -15,6 +15,6 @@ import { TypeOrmExModule } from '../typeorm-ex.module';
   ],
   controllers: [SessionController],
   providers: [SessionService],
-  exports: [SessionService],
+  exports: [SessionService, SessionModule],
 })
 export class SessionModule {}
