@@ -6,10 +6,10 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from 'src/session/entities/session.entity';
 import { Repository } from 'typeorm';
-import { CreateSessionDto } from '../dto/create-session.dto';
+import { CreateSessionDto } from './dto/create-session.dto';
 import { QueryService } from '@nestjs-query/core';
 import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
-import { UpdateSessionDto } from '../dto/update-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
 
 @Injectable()
 @QueryService(Session)

@@ -9,10 +9,10 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { ServiceInterceptor } from 'src/interceptors/service.interceptor';
-import { CreateServiceDto } from '../dto/create-service.dto';
-import { UpdateServiceDto } from '../dto/update-service.dto';
-import { Service } from '../entities/service.entity';
-import { ServiceService } from '../services/service.service';
+import { CreateServiceDto } from './dto/create-service.dto';
+import { UpdateServiceDto } from './dto/update-service.dto';
+import { Service } from './entities/service.entity';
+import { ServiceService } from './service.service';
 
 @Controller('service')
 @UseInterceptors(ServiceInterceptor)

@@ -1,5 +1,5 @@
-import { Session } from 'src/session/entities/session.entity';
-import { Service } from 'src/service/entities/service.entity';
+import { CONFIGURABLE_MODULE_ID } from '@nestjs/common/module-utils/constants';
+import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
 import {
   Column,
   Entity,
@@ -8,10 +8,8 @@ import {
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
-import { ModesetList } from './modesetList.entity';
-import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
 
-// ModeAppId - liveAppId (6) || ModesetList - modeId (1)
+// 별도의 PK가 존재하지 않는 테이블
 @Entity('mode_app_id')
 export class ModeAppId {
   @PrimaryColumn({ primary: false })
@@ -20,10 +18,20 @@ export class ModeAppId {
   @Column()
   modeId: string;
 
-  @ManyToOne(() => ModesetList, (liveAppId) => liveAppId.liveAppIds, {
-    onDelete: 'SET NULL',
-  })
-  liveAppId: LiveAppId;
+  // ModeAppId - liveAppId (6) || ModesetList - modeId (1)
+  // @ManyToOne(() => LiveAppId, modeIds => )
+  // modeIds: LiveAppId[];
+
+  // mode_app_id의 liveAppId가 live_app_id를 참조하는 FK
+  // @OneToOne(() => LiveAppId, { onDelete: 'SET NULL' })
+  // @JoinColumn({
+  //   name: 'liveAppId_fk',
+  //   referencedColumnName: 'liveAppId',
+  // })
+  // liveAppId: LiveAppId;
+
+  @Column()
+  liveAppId: string;
 
   @Column()
   modeAppId: string;
@@ -31,11 +39,26 @@ export class ModeAppId {
   @Column()
   debug: boolean;
 
-  @OneToOne(() => Session, { onDelete: 'SET NULL' })
-  @JoinColumn()
-  sessionName: Session;
+  @Column()
+  sessionName: string;
 
-  @OneToOne(() => Service, { onDelete: 'SET NULL' })
-  @JoinColumn()
-  serviceName: Service;
+  @Column()
+  serviceName: string;
+
+  // join하지 않고 페이지에서 repository를 불러오는 방식은?
+  // // session_server의 sessionName 칼럼을 참조
+  // @OneToOne(() => Session, { onDelete: 'SET NULL' })
+  // @JoinColumn({
+  //   name: 'sessionName_fk',
+  //   referencedColumnName: 'sessionName',
+  // })
+  // sessionName: Session;
+
+  // // service_server의 serviceName 칼럼을 참조
+  // @OneToOne(() => Service, { onDelete: 'SET NULL' })
+  // @JoinColumn({
+  //   name: 'sessionName_fk',
+  //   referencedColumnName: 'serviceName',
+  // })
+  // serviceName: Service;
 }

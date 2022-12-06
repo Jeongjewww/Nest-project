@@ -10,9 +10,9 @@ import {
 } from '@nestjs/common';
 import { SessionInterceptor } from 'src/interceptors/session.interceptor';
 import { Session } from 'src/session/entities/session.entity';
-import { CreateSessionDto } from '../dto/create-session.dto';
-import { UpdateSessionDto } from '../dto/update-session.dto';
-import { SessionService } from '../services/session.service';
+import { CreateSessionDto } from './dto/create-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
+import { SessionService } from './session.service';
 
 @Controller('session')
 @UseInterceptors(SessionInterceptor)
