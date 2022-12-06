@@ -1,8 +1,10 @@
+import { ModeAppId } from 'src/modeset/entities/modeAppId.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
@@ -32,13 +34,18 @@ export class Service {
   @Column({ nullable: true })
   createSub: string;
 
-  @CreateDateColumn({ nullable: true })
+  @CreateDateColumn()
   createDate: Date;
 
   @Column({ nullable: true })
   updateSub: string;
 
-  @UpdateDateColumn({ nullable: true })
+  // @Column({
+  //   type: 'timestamp',
+  //   default: () => 'CURRENT_TIMESTAMP',
+  //   onUpdate: 'CURRENT_TIMESTAMP',
+  // })
+  @UpdateDateColumn()
   updateDate: Date;
 
   @Column({ default: 0 })

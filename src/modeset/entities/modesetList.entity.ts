@@ -20,25 +20,32 @@ export class ModesetList {
   @PrimaryColumn()
   modeId: string;
 
+  // @PrimaryColumn()
+  // @OneToMany(() => ModeAppId, modeId => modeId.modeIds)
+  // modeId: ModeAppId;
+
   @Column()
   modeName: string;
 
   @Column()
   desc: string;
 
-  @OneToMany(() => ModeAppId, (liveAppId) => liveAppId.modeAppId)
-  liveAppIds: ModeAppId[];
-
   @Column({ nullable: true })
   createSub: string;
 
-  @CreateDateColumn({ nullable: true })
+  @CreateDateColumn()
   createDate: Date;
 
   @Column({ nullable: true })
   updateSub: string;
 
-  @UpdateDateColumn({ nullable: true })
+  // mariadb 5.x 버전의 경우, CURRENT_TIMESTAMP는 하나의 칼럼만 지원
+  // @Column({
+  //   type: 'timestamp',
+  //   default: () => 'CURRENT_TIMESTAMP',
+  //   onUpdate: 'CURRENT_TIMESTAMP',
+  // })
+  @UpdateDateColumn()
   updateDate: Date;
 
   @Column({ default: 0 })
