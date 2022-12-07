@@ -1,3 +1,4 @@
+import { Service } from 'src/service/entities/service.entity';
 import { Session } from 'src/session/entities/session.entity';
 import {
   Column,
@@ -39,11 +40,19 @@ export class ModeAppId {
   @Column()
   debug: boolean;
 
-  @Column()
-  sessionName: string;
+  @OneToOne(() => Session)
+  @JoinColumn({
+    name: 'sessionName_fk',
+    referencedColumnName: 'sessionName',
+  })
+  sessionName: Session;
 
-  @Column()
-  serviceName: string;
+  @OneToOne(() => Service)
+  @JoinColumn({
+    name: 'serviceName_fk',
+    referencedColumnName: 'serviceName',
+  })
+  serviceName: Service;
 
   // join하지 않고 페이지에서 repository를 불러오는 방식은?
   // // session_server의 sessionName 칼럼을 참조

@@ -19,13 +19,13 @@ export class CreateServiceDto {
   @IsOptional()
   ip: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  port: number;
+  port: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  inspectorPort: number;
+  inspectorPort: string;
 
   @IsString()
   @IsOptional()

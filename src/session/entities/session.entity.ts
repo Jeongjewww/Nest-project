@@ -16,6 +16,7 @@ export class Session {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
+  @OneToOne(() => ModeAppId)
   @Column()
   sessionName: string;
 
@@ -23,13 +24,13 @@ export class Session {
   privateIp: string;
 
   @Column({ nullable: true })
-  privatePort: number;
+  privatePort: string;
 
   @Column({ nullable: true })
   publicIp: string;
 
   @Column({ nullable: true })
-  publicPort: number;
+  publicPort: string;
 
   @Column({ nullable: true })
   createSub: string;
