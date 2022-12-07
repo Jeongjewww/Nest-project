@@ -16,6 +16,7 @@ export class Session {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
+  @OneToOne(() => ModeAppId)
   @Column()
   sessionName: string;
 
@@ -23,13 +24,13 @@ export class Session {
   privateIp: string;
 
   @Column({ nullable: true })
-  privatePort: number;
+  privatePort: string;
 
   @Column({ nullable: true })
   publicIp: string;
 
   @Column({ nullable: true })
-  publicPort: number;
+  publicPort: string;
 
   @Column({ nullable: true })
   createSub: string;
@@ -40,6 +41,7 @@ export class Session {
   @Column({ nullable: true })
   updateSub: string;
 
+  // mariadb 5.x 버전의 경우, CURRENT_TIMESTAMP는 하나의 칼럼만 지원
   // @Column({
   //   type: 'timestamp',
   //   default: () => 'CURRENT_TIMESTAMP',

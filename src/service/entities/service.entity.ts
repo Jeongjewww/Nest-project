@@ -16,6 +16,7 @@ export class Service {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
+  @OneToOne(() => ModeAppId)
   @Column()
   serviceName: string;
 
@@ -26,10 +27,10 @@ export class Service {
   ip: string;
 
   @Column({ nullable: true })
-  port: number;
+  port: string;
 
   @Column({ nullable: true })
-  inspectorPort: number;
+  inspectorPort: string;
 
   @Column({ nullable: true })
   createSub: string;

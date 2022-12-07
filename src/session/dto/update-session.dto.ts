@@ -1,4 +1,13 @@
-import { PartialType } from "@nestjs/mapped-types";
-import { CreateSessionDto } from "./create-session.dto";
+import { IntersectionType } from '@nestjs/mapped-types';
+import { IsNumber } from 'class-validator';
+import { CreateSessionDto } from './create-session.dto';
 
-export class UpdateSessionDto extends PartialType(CreateSessionDto) {}
+export class OneSessionDto {
+  @IsNumber()
+  id: number;
+}
+
+export class UpdateSessionDto extends IntersectionType(
+  CreateSessionDto,
+  OneSessionDto,
+) {}

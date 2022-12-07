@@ -8,9 +8,6 @@ import {
 } from 'class-validator';
 
 export class CreateSessionDto {
-  @IsNumber()
-  id: number;
-
   @IsString()
   @IsNotEmpty()
   sessionName: string;
@@ -19,17 +16,17 @@ export class CreateSessionDto {
   @IsOptional()
   privateIp: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  privatePort: number;
+  privatePort: string;
 
   @IsIP()
   @IsOptional()
   publicIp: string;
 
-  @IsNumber()
+  @IsString()
   @IsOptional()
-  publicPort: number;
+  publicPort: string;
 
   @IsString()
   @IsOptional()
