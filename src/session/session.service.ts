@@ -1,8 +1,4 @@
-import {
-  ConsoleLogger,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Session } from 'src/session/entities/session.entity';
 import { Repository } from 'typeorm';
@@ -22,6 +18,14 @@ export class SessionService extends TypeOrmQueryService<Session> {
   }
 
   async getAll(): Promise<Session[]> {
+    // const id: any = 32;
+    // const data = await this.serviceRepository.query(
+    //   'SELECT * FROM `service_server` WHERE id = ?',
+    //   id,
+    // );
+    // console.log('이거 결과 값');
+    // console.log(data);
+    // console.log('this is result');
     return await this.sessionRepository.find();
   }
 

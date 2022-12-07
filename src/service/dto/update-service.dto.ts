@@ -1,4 +1,13 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { IntersectionType } from '@nestjs/mapped-types';
+import { IsNumber } from 'class-validator';
 import { CreateServiceDto } from './create-service.dto';
 
-export class UpdateServiceDto extends PartialType(CreateServiceDto) {}
+export class OneServiceDto {
+  @IsNumber()
+  id: number;
+}
+
+export class UpdateServiceDto extends IntersectionType(
+  CreateServiceDto,
+  OneServiceDto,
+) {}

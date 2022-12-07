@@ -40,6 +40,7 @@ export class Session {
   @Column({ nullable: true })
   updateSub: string;
 
+  // mariadb 5.x 버전의 경우, CURRENT_TIMESTAMP는 하나의 칼럼만 지원
   // @Column({
   //   type: 'timestamp',
   //   default: () => 'CURRENT_TIMESTAMP',

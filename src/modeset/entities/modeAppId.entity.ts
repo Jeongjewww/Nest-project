@@ -1,5 +1,4 @@
-import { CONFIGURABLE_MODULE_ID } from '@nestjs/common/module-utils/constants';
-import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
+import { Session } from 'src/session/entities/session.entity';
 import {
   Column,
   Entity,
@@ -8,6 +7,7 @@ import {
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
+import { ModesetList } from './modesetList.entity';
 
 // 별도의 PK가 존재하지 않는 테이블
 @Entity('mode_app_id')
@@ -15,12 +15,12 @@ export class ModeAppId {
   @PrimaryColumn({ primary: false })
   id: number;
 
-  @Column()
+  @ManyToOne(() => ModesetList, { onDelete: 'CASCADE' })
+  @JoinColumn({
+    name: 'modeId_fk',
+    referencedColumnName: 'modeId',
+  })
   modeId: string;
-
-  // ModeAppId - liveAppId (6) || ModesetList - modeId (1)
-  // @ManyToOne(() => LiveAppId, modeIds => )
-  // modeIds: LiveAppId[];
 
   // mode_app_id의 liveAppId가 live_app_id를 참조하는 FK
   // @OneToOne(() => LiveAppId, { onDelete: 'SET NULL' })

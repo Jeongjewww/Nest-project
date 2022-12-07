@@ -45,7 +45,7 @@ import { ModesetJsonRepository } from './modeset/repositories/modesetjson.reposi
         ModeAppId,
         ModesetJson,
       ],
-      synchronize: false,
+      synchronize: true,
       logging: true,
     }),
     TypeOrmExModule.forCustomRepository([

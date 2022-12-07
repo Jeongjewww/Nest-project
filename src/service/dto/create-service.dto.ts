@@ -8,9 +8,6 @@ import {
 } from 'class-validator';
 
 export class CreateServiceDto {
-  @IsNumber()
-  id: number;
-
   @IsString()
   @IsNotEmpty()
   serviceName: string;
