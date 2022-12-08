@@ -2,7 +2,6 @@ import { QueryService } from '@nestjs-query/core';
 import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { appDataSource } from 'datasource';
 import { DataSource, Repository } from 'typeorm';
 import { CreateModesetDto } from './dto/create-modeset.dto';
 import { UpdateModesetDto } from './dto/update-modeset.dto';
