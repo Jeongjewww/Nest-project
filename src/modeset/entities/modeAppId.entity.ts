@@ -5,69 +5,94 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { ModesetList } from './modesetList.entity';
 
 // 별도의 PK가 존재하지 않는 테이블
 @Entity('mode_app_id')
 export class ModeAppId {
-  @PrimaryColumn({ primary: false })
+  @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @ManyToOne(() => ModesetList, { onDelete: 'CASCADE' })
-  @JoinColumn({
-    name: 'modeId_fk',
-    referencedColumnName: 'modeId',
-  })
+  @Column({ nullable: true })
   modeId: string;
 
-  // mode_app_id의 liveAppId가 live_app_id를 참조하는 FK
-  // @OneToOne(() => LiveAppId, { onDelete: 'SET NULL' })
-  // @JoinColumn({
-  //   name: 'liveAppId_fk',
-  //   referencedColumnName: 'liveAppId',
-  // })
-  // liveAppId: LiveAppId;
+  @Column({ nullable: true })
+  desc: string;
 
-  @Column()
+  // onDelete: 'CASCADE' => test
+  @ManyToOne(() => ModesetList, (modeIds) => modeIds.modeAppIdList, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'modeId_fk', referencedColumnName: 'modeId' })
+  modeIds: ModesetList;
+
+  @Column({ nullable: true })
   liveAppId: string;
 
-  @Column()
+  @Column({ nullable: true })
   modeAppId: string;
 
-  @Column()
+  @Column({ nullable: true })
   debug: boolean;
 
-  @OneToOne(() => Session)
+  @Column({ nullable: true })
+  session: string;
+
+  @ManyToOne(
+    () => Session,
+    (publicSessionIds) => publicSessionIds.publicSessionList,
+    {
+      eager: true,
+    },
+  )
   @JoinColumn({
-    name: 'sessionName_fk',
+    name: 'publicSessionIds_fk',
     referencedColumnName: 'sessionName',
   })
-  sessionName: Session;
+  publicSessionIds: Session;
 
-  @OneToOne(() => Service)
+  @ManyToOne(
+    () => Session,
+    (privateSessionIds) => privateSessionIds.privateSessionList,
+    {
+      eager: true,
+    },
+  )
   @JoinColumn({
-    name: 'serviceName_fk',
+    name: 'privateSessionIds_fk',
+    referencedColumnName: 'sessionName',
+  })
+  privateSessionIds: Session;
+
+  @Column({ nullable: true })
+  service: string;
+
+  @ManyToOne(
+    () => Service,
+    (publicServiceIds) => publicServiceIds.publicServiceList,
+    {
+      eager: true,
+    },
+  )
+  @JoinColumn({
+    name: 'publicServiceIds_fk',
     referencedColumnName: 'serviceName',
   })
-  serviceName: Service;
+  publicServiceIds: Service;
 
-  // join하지 않고 페이지에서 repository를 불러오는 방식은?
-  // // session_server의 sessionName 칼럼을 참조
-  // @OneToOne(() => Session, { onDelete: 'SET NULL' })
-  // @JoinColumn({
-  //   name: 'sessionName_fk',
-  //   referencedColumnName: 'sessionName',
-  // })
-  // sessionName: Session;
-
-  // // service_server의 serviceName 칼럼을 참조
-  // @OneToOne(() => Service, { onDelete: 'SET NULL' })
-  // @JoinColumn({
-  //   name: 'sessionName_fk',
-  //   referencedColumnName: 'serviceName',
-  // })
-  // serviceName: Service;
+  @ManyToOne(
+    () => Service,
+    (privateServiceIds) => privateServiceIds.privateServiceList,
+    {
+      eager: true,
+    },
+  )
+  @JoinColumn({
+    name: 'privateServiceIds_fk',
+    referencedColumnName: 'serviceName',
+  })
+  privateServiceIds: Service;
 }

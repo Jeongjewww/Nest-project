@@ -25,7 +25,7 @@ export class LiveappController {
   }
 
   @Post()
-  async createLive(@Query() liveData: CreateLiveAppDto): Promise<void> {
+  async createLive(@Body() liveData: CreateLiveAppDto): Promise<void> {
     return await this.liveappService.create(liveData);
   }
 
@@ -34,7 +34,6 @@ export class LiveappController {
     return await this.liveappService.delete(idList);
   }
 
-  // Live App Id 페이지에 update 기능이 필요한지
   @Patch()
   async updateLive(@Body() updateData: UpdateLiveAppDto[]): Promise<void> {
     return await this.liveappService.update(updateData);

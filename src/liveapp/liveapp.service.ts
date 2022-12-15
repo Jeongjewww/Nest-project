@@ -21,6 +21,9 @@ export class LiveappService extends TypeOrmQueryService<LiveAppId> {
     return await this.LiveAppRepository.find();
   }
 
+  async getLiveAll(): Promise<LiveAppId[]> {
+    return await this.LiveAppRepository.find();
+  }
   // publicAppUrl: `session_server`의 privateIp, privatePort
   // privateAppUrl: `session_server`의 publicIp, publicPort
   async create(liveData: CreateLiveAppDto): Promise<void> {
@@ -49,7 +52,6 @@ export class LiveappService extends TypeOrmQueryService<LiveAppId> {
     }
   }
 
-  // Live App Id 페이지에 update 기능이 필요한지
   async update(updateData: UpdateLiveAppDto[]): Promise<void> {
     try {
       for (var i = 0; i < updateData.length; i++) {

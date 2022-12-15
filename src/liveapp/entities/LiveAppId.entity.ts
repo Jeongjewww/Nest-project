@@ -15,7 +15,9 @@ export class LiveAppId {
   id: number;
 
   @Column()
-  // @OneToOne(() => ModeAppId)
+  desc: string;
+
+  @Column()
   liveAppId: string;
 
   @Column()

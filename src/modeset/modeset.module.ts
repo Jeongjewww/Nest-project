@@ -11,11 +11,21 @@ import { ModesetListRepository } from './repositories/modeset.repository';
 import { ModesetJsonRepository } from './repositories/modesetjson.repository';
 import { ModesetService } from './modeset.service';
 import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
+import { Session } from 'src/session/entities/session.entity';
+import { Service } from 'src/service/entities/service.entity';
+import { LiveappService } from 'src/liveapp/liveapp.service';
 
 @Module({
   imports: [
     ConfigModule,
-    TypeOrmModule.forFeature([ModesetList, ModeAppId, ModesetJson, LiveAppId]),
+    TypeOrmModule.forFeature([
+      ModesetList,
+      Session,
+      Service,
+      ModeAppId,
+      ModesetJson,
+      LiveAppId,
+    ]),
     TypeOrmExModule.forCustomRepository([
       ModesetListRepository,
       ModeAppRepository,
@@ -23,7 +33,7 @@ import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
     ]),
   ],
   controllers: [ModesetController],
-  providers: [ModesetService],
+  providers: [ModesetService, LiveappService],
   exports: [ModesetService],
 })
 export class ModesetModule {}

@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
@@ -16,9 +16,20 @@ export class Service {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @OneToOne(() => ModeAppId)
   @Column()
   serviceName: string;
+
+  @OneToMany(
+    () => ModeAppId,
+    (publicServiceList) => publicServiceList.publicServiceIds,
+  )
+  publicServiceList: ModeAppId[];
+
+  @OneToMany(
+    () => ModeAppId,
+    (privateServiceList) => privateServiceList.privateServiceIds,
+  )
+  privateServiceList: ModeAppId[];
 
   @Column()
   network: string;
@@ -41,11 +52,6 @@ export class Service {
   @Column({ nullable: true })
   updateSub: string;
 
-  // @Column({
-  //   type: 'timestamp',
-  //   default: () => 'CURRENT_TIMESTAMP',
-  //   onUpdate: 'CURRENT_TIMESTAMP',
-  // })
   @UpdateDateColumn()
   updateDate: Date;
 

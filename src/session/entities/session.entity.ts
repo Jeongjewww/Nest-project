@@ -4,7 +4,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
@@ -16,9 +16,20 @@ export class Session {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @OneToOne(() => ModeAppId)
   @Column()
   sessionName: string;
+
+  @OneToMany(
+    () => ModeAppId,
+    (publicSessionList) => publicSessionList.publicSessionIds,
+  )
+  publicSessionList: ModeAppId[];
+
+  @OneToMany(
+    () => ModeAppId,
+    (privateSessionList) => privateSessionList.publicSessionIds,
+  )
+  privateSessionList: ModeAppId[];
 
   @Column({ nullable: true })
   privateIp: string;

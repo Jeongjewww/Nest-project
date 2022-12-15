@@ -4,7 +4,6 @@ import {
   DeleteDateColumn,
   Entity,
   OneToMany,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
@@ -17,15 +16,11 @@ export class ModesetList {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @OneToMany(() => ModeAppId, (modeId) => modeId.modeId)
-  @PrimaryColumn()
+  @Column()
   modeId: string;
 
   @Column()
   modeName: string;
-
-  @Column()
-  desc: string;
 
   @Column({ nullable: true })
   createSub: string;
@@ -42,12 +37,12 @@ export class ModesetList {
   @Column({ default: 0 })
   activation: boolean;
 
-  @Column({ default: false })
-  delete: boolean;
-
   @Column({ default: 0 })
   refCnt: number;
 
   @DeleteDateColumn()
   deletedAt?: Date;
+
+  @OneToMany(() => ModeAppId, (modeAppIdList) => modeAppIdList.modeId)
+  modeAppIdList: ModeAppId[];
 }

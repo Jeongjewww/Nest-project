@@ -26,14 +26,18 @@ export class SessionService extends TypeOrmQueryService<Session> {
     // console.log('이거 결과 값');
     // console.log(data);
     // console.log('this is result');
-    return await this.sessionRepository.find();
+    const result = await this.sessionRepository.find();
+    console.log(result);
+    return result;
   }
 
   async create(sessionData: CreateSessionDto) {
+    console.log(sessionData);
     try {
       await this.sessionRepository.save(sessionData);
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
+        console.log('야 여기 에러났다 ! ');
         throw new InternalServerErrorException('데이터를 추가할 수 없습니다.', {
           cause: new Error(),
           description: '중복데이터가 존재합니다.',
@@ -55,11 +59,12 @@ export class SessionService extends TypeOrmQueryService<Session> {
     }
   }
 
-  async update(updateData: UpdateSessionDto[]): Promise<void> {
+  // to-do: delete된 값에 대해서도 중복처리하는 데이터에 대해 delete data만 저장하는 table 따로 생성?
+  async update(updateData: UpdateSessionDto[]): Promise<any> {
     try {
       // console.log(updateData.length);
       for (var i = 0; i < updateData.length; i++) {
-        // console.log(updateData[i].id, updateData[i]);
+        console.log(updateData[i].id, updateData[i]);
         await this.sessionRepository.softDelete(updateData[i].id);
         await this.sessionRepository.save(updateData[i]);
       }

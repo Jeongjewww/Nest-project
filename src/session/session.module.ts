@@ -6,8 +6,6 @@ import { SessionController } from './session.controller';
 import { Session } from './entities/session.entity';
 import { SessionRepository } from './repositories/session.repository';
 import { SessionService } from './session.service';
-import { ServiceRepository } from 'src/service/repositories/service.repository';
-import { Service } from 'src/service/entities/service.entity';
 
 @Module({
   imports: [
