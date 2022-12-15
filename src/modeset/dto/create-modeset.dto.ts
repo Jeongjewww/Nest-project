@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { DeleteDateColumn } from 'typeorm';
 
 export class CreateModesetDto {
@@ -9,4 +9,7 @@ export class CreateModesetDto {
   @IsString()
   @IsNotEmpty()
   modeName: string;
+
+  @DeleteDateColumn()
+  deletedAt?: Date;
 }

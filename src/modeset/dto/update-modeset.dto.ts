@@ -1,6 +1,5 @@
 import { IntersectionType } from '@nestjs/mapped-types';
 import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
-import { DeleteDateColumn } from 'typeorm';
 import { CreateModesetDto } from './create-modeset.dto';
 
 export class OneModesetDto {
@@ -34,9 +33,6 @@ export class OneModesetDto {
   @IsString()
   @IsOptional()
   privateService: string;
-
-  @DeleteDateColumn()
-  deletedAt?: Date;
 }
 
 export class UpdateModesetDto extends IntersectionType(

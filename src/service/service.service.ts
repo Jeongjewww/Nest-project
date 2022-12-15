@@ -29,7 +29,7 @@ export class ServiceService extends TypeOrmQueryService<Service> {
       await this.serviceRepository.save(serviceData);
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
-        console.log('야 여기 에러났다 ! ');
+        console.log('중복데이터가 존재하여 데이터를 추가할 수 없습니다.');
         throw new InternalServerErrorException('데이터를 추가할 수 없습니다.', {
           cause: new Error(),
           description: '중복데이터가 존재합니다.',
@@ -60,7 +60,7 @@ export class ServiceService extends TypeOrmQueryService<Service> {
       }
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
-        console.log('야 여기 에러났다 ! ');
+        console.log('중복데이터가 존재하여 데이터를 수정할 수 없습니다.');
         throw new InternalServerErrorException('데이터를 수정할 수 없습니다.', {
           cause: new Error(),
           description: '중복데이터가 존재합니다.',

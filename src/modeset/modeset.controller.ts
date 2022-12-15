@@ -27,7 +27,7 @@ function modeid() {
 
   // 날짜가 바뀌는 것에 대한 조건
   while (true) {
-    let modeid = fullDate + '-0' + `${id++}`;
+    let modeid = fullDate + '-' + `${id++}`;
     return modeid;
   }
 }
@@ -49,17 +49,18 @@ export class ModesetController {
   async createModeset(@Body() modesetData: CreateModesetDto): Promise<void> {
     let lives = await this.liveappService.getLiveAll();
     let allocateModeId = modeid();
+    modesetData.modeId = allocateModeId; // modeId 값 지정
     console.log(allocateModeId);
-    // console.log('이게 contorller 에서 부른 live');
-    // console.log(lives);
     // console.log(lives[0].liveAppId);
 
-    return await this.modesetService.create(allocateModeId, lives, modesetData);
+    return await this.modesetService.create(lives, modesetData);
   }
 
   @Delete()
-  async deleteModeset(@Query() id: number): Promise<void> {
-    return await this.modesetService.delete(id);
+  async deleteModeset(@Query() modeid: string[]): Promise<void> {
+    // console.log(modeid.modeId);
+    // modeid = modeid.modeid;
+    // return await this.modesetService.delete(modeid);
   }
 
   @Patch()

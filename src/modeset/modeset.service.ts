@@ -2,7 +2,6 @@ import { QueryService } from '@nestjs-query/core';
 import { TypeOrmQueryService } from '@nestjs-query/query-typeorm';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
 import { Repository } from 'typeorm';
 import { CreateModesetDto } from './dto/create-modeset.dto';
 import { UpdateModesetDto } from './dto/update-modeset.dto';
@@ -33,7 +32,7 @@ export class ModesetService extends TypeOrmQueryService<ModeAppId> {
     // return await modeset;
 
     const modeset = await this.modeappRepository.query(
-      'SELECT *' +
+      'SELECT `modeId`, `modeName`, `desc`, `liveAppId`, `modeAppId`, `debug`, `session`, `service`' +
         ' FROM modeset_list' +
         ' JOIN mode_app_id USING(modeId)' +
         ' LEFT JOIN session_server ON(session_server.sessionName = mode_app_id.`session`)' +
@@ -43,49 +42,27 @@ export class ModesetService extends TypeOrmQueryService<ModeAppId> {
     return await modeset;
   }
 
-  async create(allocateModeId, lives, modesetData: CreateModesetDto) {
+  async create(lives: any, modesetData: CreateModesetDto) {
     try {
-      modesetData.modeId = allocateModeId; // modeId 값 지정
+      // modesetData.modeId = allocateModeId; // modeId 값 지정
       await this.modesetlistRepository.save(modesetData);
-      console.log(modesetData);
-
-      var sql = 'INSERT INTO `mode_app_id`(`modeId`, `liveAppId`,`modeId_fk`)';
 
       // ModesetList의 liveAppId에 LiveAppId의 liveAppId값 6개 insert
       let modeAppList: ModeAppId[] = [];
-      // lives[i].liveAppId => 'home', 'alaska', ...
       for (var i = 0; i < lives.length; i++) {
         var modeApp: ModeAppId = new ModeAppId();
-        console.log('야 이거 돈다야 ');
+        console.log('정상실행');
 
-        if (i == 0)
-          sql +=
-            'VALUES(' +
-            modesetData.modeId +
-            ', ' +
-            lives[i].liveAppId +
-            ', ' +
-            modesetData.modeId +
-            ')';
-        else
-          sql +=
-            ',(' +
-            modesetData.modeId +
-            ', ' +
-            lives[i].liveAppId +
-            ', ' +
-            modesetData.modeId +
-            ')';
-        // modeApp.modeId = modesetData.modeId;
-        // modeApp.liveAppId = lives[i].liveAppId;
-        // modeAppList.push(modeApp);
-        await this.modeappRepository.save(modeApp);
+        modeApp.modeId = modesetData.modeId;
+        modeApp.liveAppId = lives[i].liveAppId;
+        modeAppList.push(modeApp);
+        // console.log(modeAppList);
+
+        await this.modeappRepository.save(modeAppList[i]);
       }
-      console.log(sql);
-      console.log(modeAppList);
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
-        console.log('야 여기 에러났다 ! ');
+        console.log('중복데이터가 존재하여 데이터를 추가할 수 없습니다.');
         throw new InternalServerErrorException('데이터를 추가할 수 없습니다.', {
           cause: new Error(),
           description: '중복데이터가 존재합니다.',
@@ -94,9 +71,10 @@ export class ModesetService extends TypeOrmQueryService<ModeAppId> {
     }
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(modeid: string[]): Promise<void> {
     try {
-      await this.modeappRepository.softDelete(id);
+      await this.modeappRepository.softDelete(modeid);
+      await this.modesetlistRepository.softDelete(modeid);
     } catch (err) {
       throw new InternalServerErrorException('데이터를 삭제할 수 없습니다.', {
         cause: new Error(),
@@ -113,6 +91,7 @@ export class ModesetService extends TypeOrmQueryService<ModeAppId> {
       }
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {
+        console.log('중복데이터가 존재하여 데이터를 수정할 수 없습니다.');
         throw new InternalServerErrorException('데이터를 수정할 수 없습니다.', {
           cause: new Error(),
           description: '중복데이터가 존재합니다.',
