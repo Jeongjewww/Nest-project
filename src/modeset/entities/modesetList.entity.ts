@@ -3,12 +3,10 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
-import { ModeAppId } from './modeAppId.entity';
 
 @Entity('modeset_list')
 @Unique(['modeId'])
@@ -43,6 +41,6 @@ export class ModesetList {
   @DeleteDateColumn()
   deletedAt?: Date;
 
-  @OneToMany(() => ModeAppId, (modeAppIdList) => modeAppIdList.modeId)
-  modeAppIdList: ModeAppId[];
+  // @OneToMany(() => ModeAppId, (modeAppIdList) => modeAppIdList.modeId)
+  // modeAppIdList: ModeAppId[];
 }

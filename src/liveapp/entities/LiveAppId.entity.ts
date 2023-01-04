@@ -1,9 +1,9 @@
+import { ModeAppId } from 'src/modeset/entities/modeAppId.entity';
 import {
   Column,
   DeleteDateColumn,
   Entity,
-  OneToOne,
-  PrimaryColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
@@ -14,16 +14,21 @@ export class LiveAppId {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   desc: string;
 
   @Column()
   liveAppId: string;
 
-  @Column()
+  @OneToMany(() => ModeAppId, (liveApp) => liveApp.liveApps, {
+    cascade: true,
+  })
+  liveApp: ModeAppId;
+
+  @Column({ nullable: true })
   publicUrl: string;
 
-  @Column()
+  @Column({ nullable: true })
   privateUrl: string;
 
   @Column({ default: 0 })

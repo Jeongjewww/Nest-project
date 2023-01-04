@@ -1,14 +1,16 @@
+import { LiveAppId } from 'src/liveapp/entities/LiveAppId.entity';
 import { Service } from 'src/service/entities/service.entity';
 import { Session } from 'src/session/entities/session.entity';
 import {
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import { ModesetList } from './modesetList.entity';
 
 // 별도의 PK가 존재하지 않는 테이블
 @Entity('mode_app_id')
@@ -22,15 +24,22 @@ export class ModeAppId {
   @Column({ nullable: true })
   desc: string;
 
-  // onDelete: 'CASCADE' => test
-  @ManyToOne(() => ModesetList, (modeIds) => modeIds.modeAppIdList, {
-    eager: true,
-  })
-  @JoinColumn({ name: 'modeId_fk', referencedColumnName: 'modeId' })
-  modeIds: ModesetList;
+  // @ManyToOne(() => ModesetList, (modeIds) => modeIds.modeAppIdList, {
+  //   eager: true,
+  //   onDelete: "CASCADE",
+  // })
+  // @JoinColumn({ name: "modeId_fk", referencedColumnName: "modeId" })
+  // modeIds: ModesetList;
 
   @Column({ nullable: true })
   liveAppId: string;
+
+  @ManyToOne(() => LiveAppId, (liveApps) => liveApps.liveApp, {
+    eager: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'liveApp_fk' })
+  liveApps: LiveAppId;
 
   @Column({ nullable: true })
   modeAppId: string;
@@ -39,7 +48,10 @@ export class ModeAppId {
   debug: boolean;
 
   @Column({ nullable: true })
-  session: string;
+  publicSession: string;
+
+  @Column({ nullable: true })
+  privateSession: string;
 
   @ManyToOne(
     () => Session,
@@ -68,7 +80,10 @@ export class ModeAppId {
   privateSessionIds: Session;
 
   @Column({ nullable: true })
-  service: string;
+  publicService: string;
+
+  @Column({ nullable: true })
+  privateService: string;
 
   @ManyToOne(
     () => Service,
@@ -95,4 +110,13 @@ export class ModeAppId {
     referencedColumnName: 'serviceName',
   })
   privateServiceIds: Service;
+
+  @CreateDateColumn()
+  createDate: Date;
+
+  @UpdateDateColumn()
+  updateDate: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

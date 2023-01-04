@@ -47,7 +47,9 @@ export class SessionService extends TypeOrmQueryService<Session> {
   }
 
   async delete(idList: string[]): Promise<void> {
+    console.log(idList);
     for (const id in idList) {
+      console.log(id, idList[id]);
       try {
         await this.sessionRepository.softDelete(idList[id]);
       } catch (err) {

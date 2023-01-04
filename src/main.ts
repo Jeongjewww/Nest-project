@@ -14,10 +14,10 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('Session API')
-    .setDescription('API info of Seesion Server')
+    .setTitle('Modeset API')
+    .setDescription('API info of Modeset Server')
     .setVersion('v0.1')
-    .addTag('session')
+    .addTag('modeset')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

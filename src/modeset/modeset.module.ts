@@ -20,10 +20,10 @@ import { LiveappService } from 'src/liveapp/liveapp.service';
     ConfigModule,
     TypeOrmModule.forFeature([
       ModesetList,
+      ModesetJson,
       Session,
       Service,
       ModeAppId,
-      ModesetJson,
       LiveAppId,
     ]),
     TypeOrmExModule.forCustomRepository([
